@@ -53,6 +53,8 @@ Unset Printing Implicit Defensive.
 Import Order.TTheory GRing.Theory Num.Theory.
 Import numFieldTopology.Exports.
 
+(* NEXT LEMMA IS FROM THE TUTORIAL *)
+
 Lemma divand : forall (m n : nat), 2 %| n /\ 3 %| m -> 6 %| n * m .
 Proof.
 move=> m n. move=> H.
@@ -70,15 +72,22 @@ by [].
 Qed.
 (* Admitted. *)
 
+(* DONE... *)
+
 Lemma square_and_cube_modulo7 (m n p : nat) : m = n ^ 2 -> m = p ^ 3 ->
   (m == 0 %[mod 7]) || (m == 1 %[mod 7]).
 Proof.
+Check m == 0 %[mod 7].
+rewrite /(_ || _).
 (* Proof suggestion. *)
 (* 1. First subsitute the first equality inside the rest and get rid of m *)
 (*    see rewrite or intro patterns (after the move=>) *)
+move=> A.
+rewrite A.
 (* 2. Take the modulo of the equation n ^ 2 = p ^ 2. *)
 (*    You can use have: to pose an intermediate statement. *)
 (*    Or you can use a congr1 in a forward view. *)
+Check congr1.
 (* 3. Then push the modulo "to the leaves" / inside *)
 (*    Hint: *) Search modn expn.
 (* 4. Generalize using the fact that a modulo 7 is smaller than 7 *)

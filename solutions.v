@@ -16,7 +16,7 @@ Lemma square_and_cube_modulo7 (m n p : nat) : m = n ^ 2 -> m = p ^ 3 ->
   (m == 0 %[mod 7]) || (m == 1 %[mod 7]).
 Proof.
 (* Proof suggestion. *)
-(* 1. First subsitute the first equality inside the rest and get rid of m *)
+(* 1. First substitute the first equality inside the rest and get rid of m *)
 (*    see rewrite or intro patterns (after the move=>) *)
 move=> ->.
 (* 2. Take the modulo of the equation n ^ 2 = p ^ 2. *)
