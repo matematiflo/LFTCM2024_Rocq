@@ -3,14 +3,12 @@ From mathcomp Require Import all_ssreflect ssralg ssrint ssrnum finmap matrix.
 From mathcomp Require Import rat interval zmodp vector fieldext falgebra.
 From mathcomp Require Import mathcomp_extra boolp classical_sets functions.
 From mathcomp Require Import cardinality set_interval Rstruct.
-From mathcomp Require Import ereal reals signed topology prodnormedzmodule normedtype.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
 Import Order.TTheory GRing.Theory Num.Theory.
-Import numFieldTopology.Exports.
 
 (* Demo File for the 9:00 - 10:15 lesson :Coq/Rocq Tutorial: ssreflect tactics
 and the MathComp library *)
@@ -276,7 +274,9 @@ rewrite -powRrM -expr2 sqr_sqrtr// powR_mulrn// ?sqrtr_ge0//.
 by rewrite sqr_sqrtr// inE/=; exists 2 => //=; rewrite ratr_nat.
 Qed.
 
-(** Near  notations and tactics**)
+(** Near  notations and tactics **)
+From mathcomp Require Import ereal reals signed topology prodnormedzmodule normedtype.
+Import numFieldTopology.Exports.
 
 Local Open Scope classical_set_scope.
 Local Open Scope ring_scope.
@@ -298,7 +298,7 @@ move=> []. (* Let's destruct the continuous predicate*)
 move=> x y /=. (* Let's introduce points*)
 move=>A.
 (* I'm just introdcing the appropriate neighborhood as I want to work on the statement
- that it is a neighborhood*)
+ that it is a neighborhood *)
 move=>/nbhs_ballP. (* This allows me to say that A contains a ball around (x,y)*)
 move=> [] /=.  (*And I just destruct the statement *)
 move=> r r0 H.
@@ -309,17 +309,17 @@ exists (r/2).
    by apply: divr_gt0.
 (* Now we need to prove an inclusion of sets: this is what the notaion `<=` is for*)
 move=> /= z. 
-(* Let's destruc what a ball is a product space is*)
+(* Let's destruct what a ball is a product space is*)
 move=> [] /=. 
-(*We might want to rewrite this ball with a norm. This is done trough the
+(* We might want to rewrite this ball with a norm. This is done trough the
 ball_normE lemma and computation *) 
 Check ball_normE.
 rewrite -ball_normE /=.
 move=> Bx By.
 apply: H. 
 rewrite -ball_normE /=.
-(*Now I'll use a lemma allowing me to split the norm in two, but before that
-I'll need to do some rewriting*)
+(* Now I'll use a lemma allowing me to split the norm in two, but before that
+I'll need to do some rewriting *)
 rewrite opprD.
 rewrite addrACA.
 by rewrite normm_lt_split.
@@ -345,9 +345,9 @@ near=> a b => /=.
 rewrite opprD addrACA normm_lt_split //.
   by near:a; apply: cvgr_dist_lt => //; apply: divr_gt0.
 by near:b; apply: cvgr_dist_lt => //; apply: divr_gt0.
-(*[near: a|near: b]; apply: cvgr_dist_lt => //; apply: divr_gt0.
-*)
+(*[near: a|near: b]; apply: cvgr_dist_lt => //; apply: divr_gt0.*)
 Unshelve. all: by end_near. Qed.
+
 (*For this short proof, we have not gained a lot. The posNum type allows to
 automatically infer positivity and to avoir the two last lines*)
 
