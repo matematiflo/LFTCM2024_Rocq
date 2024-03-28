@@ -53,6 +53,23 @@ Unset Printing Implicit Defensive.
 Import Order.TTheory GRing.Theory Num.Theory.
 Import numFieldTopology.Exports.
 
+Lemma divand : forall (m n : nat), 2 %| n /\ 3 %| m -> 6 %| n * m .
+Proof.
+move=> m n. move=> H.
+move: H. move=> [/dvdnP [x A] /dvdnP [y B]].
+rewrite A B.
+apply /dvdnP.
+exists (x * y).
+rewrite mulnA.
+rewrite -(mulnA x 2 y).
+rewrite (mulnC 2 y).
+rewrite -(mulnA x _ _).
+rewrite -(mulnA y _ _).
+rewrite mulnA.
+by [].
+Qed.
+(* Admitted. *)
+
 Lemma square_and_cube_modulo7 (m n p : nat) : m = n ^ 2 -> m = p ^ 3 ->
   (m == 0 %[mod 7]) || (m == 1 %[mod 7]).
 Proof.

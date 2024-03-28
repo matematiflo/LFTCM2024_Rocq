@@ -35,10 +35,7 @@ and the MathComp library *)
 (* Invariants between Lean and Ssreflect *)
 (*  left right exists split ...   *)
 
-
-
 (** MOVES **)
-
 
 Lemma divand : forall (m n : nat), 2 %| n /\ 3 %| m -> 6 %| n * m .
 Proof.
@@ -46,12 +43,11 @@ move=> m n. move=> H.
 move: H. move=> [A B].
 Admitted.
 
-Lemma divor : forall (m n : nat), 2 %| n \/ 3 %| m -> 6 %| n * m .
+Lemma divor : forall (m n : nat), 2 %| n \/ 2 %| m -> 2 %| n * m .
 Proof.
 move=> m n. move=> H.
 move: H. move=> [A | B].
 Admitted.
-
 
 Lemma div1 : forall (n : nat), 6 %| n -> 2 * 3 %| n .
 Proof.
@@ -62,7 +58,6 @@ have H : 2 * 3 = 6 by []. (* even quicker *)
 rewrite H.
 move=> //.
 Admitted.
-
 
 Lemma div2 : forall (n m : nat), 6 %| n -> 2*3 %| n .
 Proof.
@@ -140,7 +135,6 @@ rewrite [X in _ = _ * X + _]addrC.
 rewrite [in RHS]addrC.
 Abort.
 
-
 (* Let's go into vector spaces for a bit, and let's learn how to use "Search" *)
 Lemma scalar_mult (R : fieldType) (E : lmodType R) (z : E) (r : R) :
 r != 0 -> z = r *: (r^-1 *: z).
@@ -177,7 +171,6 @@ rewrite (@Gauss_dvd 2 3)//.
 by rewrite dvdn_mulr// dvdn_mull.
 Qed.
 
-
 (** SEARCH **)
 
 Search
@@ -188,7 +181,6 @@ Search
 Close Scope ring_scope.
 
 (** VIEWS AND APPLY **)
-
 
 Lemma applied (P Q : Prop): (P -> Q) -> P -> Q.
 Proof.
