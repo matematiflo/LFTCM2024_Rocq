@@ -57,8 +57,8 @@ Import numFieldTopology.Exports.
 
 Lemma divand : forall (m n : nat), 2 %| n /\ 3 %| m -> 6 %| n * m .
 Proof.
-move=> m n. move=> H.
-move: H. move=> [/dvdnP [x A] /dvdnP [y B]].
+move=> m n.
+move=> [/dvdnP [x A] /dvdnP [y B]].
 rewrite A B.
 apply /dvdnP.
 exists (x * y).
